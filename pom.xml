@@ -7,6 +7,11 @@
     <groupId>com.zhang</groupId>
     <artifactId>sl-util</artifactId>
     <version>1.0</version>
+	
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<jackson.version>1.9.12</jackson.version>
+	</properties>
 
     <dependencies>
         <dependency>
@@ -29,6 +34,28 @@
             <artifactId>mail</artifactId>
             <version>1.4.1</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>3.12</version>
+            <scope>compile</scope>
+        </dependency>
+	    <dependency>
+		    <groupId>javax.servlet</groupId>
+		    <artifactId>javax.servlet-api</artifactId>
+		    <version>3.0.1</version>
+		    <optional>true</optional>
+	    </dependency>
+	    <dependency>
+		    <groupId>org.codehaus.jackson</groupId>
+		    <artifactId>jackson-core-asl</artifactId>
+		    <version>${jackson.version}</version>
+	    </dependency>
+	    <dependency>
+		    <groupId>org.codehaus.jackson</groupId>
+		    <artifactId>jackson-mapper-asl</artifactId>
+		    <version>${jackson.version}</version>
+	    </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>

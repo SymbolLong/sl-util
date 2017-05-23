@@ -1,14 +1,13 @@
 package com.zhang.util.codec;
 
-import java.security.Key;
-import java.security.spec.AlgorithmParameterSpec;
+import org.apache.commons.codec.binary.Base64;
 
 import javax.crypto.Cipher;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESKeySpec;
 import javax.crypto.spec.IvParameterSpec;
-
-import org.apache.commons.codec.binary.Base64;
+import java.security.Key;
+import java.security.spec.AlgorithmParameterSpec;
 
 public class DESCoderUtil {
 
@@ -31,7 +30,7 @@ public class DESCoderUtil {
         AlgorithmParameterSpec paramSpec = new IvParameterSpec(CODE_VECTOR.getBytes());
         cipher.init(Cipher.ENCRYPT_MODE, secretKey, paramSpec);
         byte[] bytes = cipher.doFinal(data);
-        return Base64.encodeBase64String(bytes);
+        return Base64Util.byteArrayToBase64(bytes);
     }
 
     public static byte[] decode(String key, byte[] data) throws Exception {

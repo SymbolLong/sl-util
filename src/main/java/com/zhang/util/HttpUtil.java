@@ -1,11 +1,5 @@
 package com.zhang.util;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 import org.apache.commons.httpclient.DefaultHttpMethodRetryHandler;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpStatus;
@@ -14,9 +8,14 @@ import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.methods.StringRequestEntity;
 import org.apache.commons.httpclient.params.HttpMethodParams;
-import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class HttpUtil {
 
@@ -56,10 +55,10 @@ public class HttpUtil {
             method = new GetMethod(url);
             method.getParams().setParameter(HttpMethodParams.RETRY_HANDLER, new DefaultHttpMethodRetryHandler(3, false));
             method.getParams().setParameter(HttpMethodParams.HTTP_CONTENT_CHARSET, "UTF-8");
-             // Execute the method.
+            // Execute the method.
             int statusCode = client.executeMethod(method);
             if (statusCode == HttpStatus.SC_OK) {
-                BufferedReader reader = null;
+                BufferedReader reader;
                 if (charset == null) {
                     reader = new BufferedReader(new InputStreamReader(method.getResponseBodyAsStream()));
                 } else {
@@ -107,7 +106,7 @@ public class HttpUtil {
         NameValuePair[] nameValues = new NameValuePair[params.size()];
         nameValues = nvps.toArray(nameValues);
         post.setRequestBody(nameValues);
-        if (StringUtils.isNotBlank(charset)) {
+        if (StringUtil.isNotEmpty(charset)) {
             post.getParams().setParameter(HttpMethodParams.HTTP_CONTENT_CHARSET, charset);
         }
 
@@ -205,7 +204,7 @@ public class HttpUtil {
             client.executeMethod(method);
             return new String(method.getResponseBody(), "UTF-8");
         } catch (Exception e) {
-            return StringUtils.EMPTY;
+            return StringUtil.EMPTY;
         }
     }
 
