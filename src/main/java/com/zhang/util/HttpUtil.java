@@ -190,6 +190,30 @@ public class HttpUtil {
             post.releaseConnection();
         }
     }
+    public String doPost(String url, String string,String type) {
+        HttpClient httpClient = new HttpClient();
+        PostMethod post = new PostMethod(url);
+
+        try {
+
+            StringRequestEntity entity = new StringRequestEntity(string, "application/"+type, "UTF-8");
+
+            post.setRequestEntity(entity);
+
+            httpClient.executeMethod(post);
+            // 获取二进制的byte流
+            byte[] b = post.getResponseBody();
+            String str = new String(b, "UTF-8");
+
+            return str;
+        } catch (Exception e) {
+            logger.error("", e);
+
+            return null;
+        } finally {
+            post.releaseConnection();
+        }
+    }
 
     public static String postRequest(String url, Map<String, String> params, HttpMethodParams attachParams) {
         HttpClient client = new HttpClient();
